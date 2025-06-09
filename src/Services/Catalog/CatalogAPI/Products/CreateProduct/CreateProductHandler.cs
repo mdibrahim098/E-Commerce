@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.CQRS;
 using CatalogAPI.Models;
-using MediatR;
+
 
 namespace CatalogAPI.Products.CreateProduct
 {
