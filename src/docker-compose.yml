@@ -1,8 +1,9 @@
 version: '3.4'
 
 services:
-  catalogapi:
-    image: ${DOCKER_REGISTRY-}catalogapi
-    build:
-      context: .
-      dockerfile: Services/Catalog/CatalogAPI/Dockerfile
+  catalogdb:
+    image: postgres
+
+volumes:
+  postgres_catalog:
+
