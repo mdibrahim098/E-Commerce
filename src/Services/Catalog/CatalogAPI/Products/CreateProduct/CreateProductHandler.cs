@@ -6,7 +6,8 @@
         : ICommand<CreateProductResult>;
     public record CreateProductResult(Guid Id);
 
-    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+    public class CreateProductCommandValidator 
+        : AbstractValidator<CreateProductCommand>
     {
         public CreateProductCommandValidator ()
         {
@@ -19,7 +20,7 @@
     }
 
 
-    internal class CreateProductCommandHandler(IDocumentSession session,
+    internal class CreateProductCommandHandler(IDocumentSession session, 
         IValidator<CreateProductCommand> validator)
          : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
