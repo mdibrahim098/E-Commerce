@@ -65,7 +65,7 @@ namespace CatalogAPI.Data
                     ImageFile = "product-5.png",
                     Price = 380.00M,
                     Category = new List<string> { "Smart Phone" }
-                },
+                }, 
                 new Product()
                 {
                     Id = new Guid("c4bbc4a2-4555-45d8-97cc-2a99b2167bff"),
