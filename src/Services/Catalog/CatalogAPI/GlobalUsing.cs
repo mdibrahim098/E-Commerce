@@ -10,3 +10,5 @@ global using Marten;
 global using MediatR;
 global using CatalogAPI.Data;
 global using Marten.Pagination;
+global using HealthChecks.UI.Client;
+global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
