@@ -1,6 +1,6 @@
 # 🛒 E-Commerce Microservices Project (.NET 8)
 
-This repository contains a fully containerized, production-ready **.NET 8-based E-Commerce Microservices Architecture**. It demonstrates best practices in building cloud-native applications using **ASP.NET Core Web API, Minimal APIs, gRPC, CQRS, DDD, RabbitMQ, MassTransit, YARP API Gateway**, and multiple databases like **PostgreSQL (Marten), SQL Server, Redis, and SQLite**.
+This repository contains a fully containerised, production-ready **.NET 8-based E-Commerce Microservices Architecture**. It leverages **ASP.NET Core Web API, Minimal APIs, gRPC, CQRS, DDD, RabbitMQ, MassTransit, YARP API Gateway**, and multiple databases, including **PostgreSQL (Marten), SQL Server, Redis, and SQLite**.
 
 ---
 
