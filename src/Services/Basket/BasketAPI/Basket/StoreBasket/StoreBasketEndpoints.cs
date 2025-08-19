@@ -1,4 +1,6 @@
 ﻿
+using Mapster;
+
 namespace BasketAPI.Basket.StoreBasket
 {
 
