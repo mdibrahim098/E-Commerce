@@ -9,5 +9,8 @@ global using BuildingBlocks.Behavior;
 global using BuildingBlocks.Exceptions;
 global using BasketAPI.Exception;
 global using BasketAPI.Data;
+global using Microsoft.Extensions.Caching.Distributed;
+global using System.Text.Json;
+
 
 
