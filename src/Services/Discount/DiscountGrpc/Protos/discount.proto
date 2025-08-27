@@ -6,7 +6,7 @@ package discount;
 
 
 // The discount service definition
-service DiscountService {
+service DiscountProtoService {
   rpc GetDiscount (GetDiscountRequest) returns (CouponModel);
   rpc CreateDiscount (CreateDiscountRequest) returns (CouponModel);
   rpc UpdateDiscount (UpdateDiscountRequest) returns (CouponModel);
