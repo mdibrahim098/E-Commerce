@@ -1,11 +1,25 @@
 ﻿namespace DiscountGrpc.Services
 {
-    public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
+    public class DiscountService (DiscountContext dbContext, ILogger<DiscountService> logger)
+        : DiscountProtoService.DiscountProtoServiceBase
     {
-       public override Task<CouponModel> GetDiscount(GetDiscountRequest request,
+       public override async Task<CouponModel> GetDiscount(GetDiscountRequest request,
                                           ServerCallContext context)
-        {           
-            return base.GetDiscount(request, context);
+        {    
+           var coupon = await  dbContext.Coupons
+                .FirstOrDefaultAsync(x => x.ProductName == request.ProductName);
+
+            if(coupon is null)
+            {
+                coupon = new Coupon { ProductName = "No Discount", Amount = 0, Description = "No Discount Desc" };
+            }
+
+            logger.LogInformation("Discount is retrieved for ProductName : {ProductName}, Amount : {Amount}", coupon.ProductName, coupon.Amount);
+           
+            var couponModel = coupon.Adapt<CouponModel>();
+            return couponModel;
+
+
         }
 
         public override Task<CouponModel> CreateDiscount(CreateDiscountRequest request,
