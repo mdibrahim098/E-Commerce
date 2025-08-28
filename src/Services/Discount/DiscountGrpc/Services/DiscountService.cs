@@ -1,4 +1,6 @@
-﻿namespace DiscountGrpc.Services
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace DiscountGrpc.Services
 {
     public class DiscountService (DiscountContext dbContext, ILogger<DiscountService> logger)
         : DiscountProtoService.DiscountProtoServiceBase
@@ -48,16 +50,41 @@
              return couponModel;
         }
 
-        public override Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request,
+        public override async Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request,
                                            ServerCallContext context)
         {
-            return base.UpdateDiscount(request, context);
+
+            var coupon = request.Coupon.Adapt<Coupon>();
+            if (coupon is null)
+            {
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "Coupon is null"));
+            }
+
+            var Check = await dbContext.Coupons.FirstOrDefaultAsync(x => x.Id == coupon.Id);
+            if (Check is null)
+            {
+                logger.LogInformation(" This ProductName is not found. ProductName : {ProductName}", coupon.ProductName);
+                coupon = new Coupon { ProductName = "Not Found", Amount = 0, Description = "Not found" };
+
+            }
+            else
+            {
+                //dbContext.Coupons.Update(coupon);
+                dbContext.Entry(Check).CurrentValues.SetValues(coupon);
+                await dbContext.SaveChangesAsync();
+                logger.LogInformation("Discount is successfully updated. ProductName : {ProductName}", coupon.ProductName);
+            }
+
+            var couponModel = coupon.Adapt<CouponModel>();
+            return couponModel;
+
+
         }
 
-        public override Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request,
+        public override async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request,
                                                      ServerCallContext context)
         {
-            return base.DeleteDiscount(request, context);
+            return await base.DeleteDiscount(request, context);
         }
 
 
