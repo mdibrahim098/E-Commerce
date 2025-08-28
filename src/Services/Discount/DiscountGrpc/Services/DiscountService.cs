@@ -22,10 +22,30 @@
 
         }
 
-        public override Task<CouponModel> CreateDiscount(CreateDiscountRequest request,
+        public override async Task<CouponModel> CreateDiscount(CreateDiscountRequest request,
                                            ServerCallContext context)
         {
-            return base.CreateDiscount(request, context);
+            var coupon = request.Coupon.Adapt<Coupon>();
+            if(coupon is null)
+            {
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "Coupon is null"));
+            }
+
+            var Check = await dbContext.Coupons .FirstOrDefaultAsync(x => x.ProductName == coupon.ProductName);
+            if (Check is not null)
+            {
+                logger.LogInformation(" This ProductName is Already has coupon. ProductName : {ProductName}", coupon.ProductName);
+                coupon = new Coupon { ProductName = "Already Exist", Amount = Check.Amount, Description = "Discount already added" };
+            }
+            else
+            {
+                dbContext.Coupons.Add(coupon);
+                await dbContext.SaveChangesAsync();
+                logger.LogInformation("Discount is successfully created. ProductName : {ProductName}", coupon.ProductName);
+            }
+                          
+             var couponModel = coupon.Adapt<CouponModel>();
+             return couponModel;
         }
 
         public override Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request,
