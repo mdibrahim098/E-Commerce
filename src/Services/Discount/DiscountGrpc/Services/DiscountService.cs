@@ -1,11 +1,11 @@
-﻿using DiscountGrpc.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace DiscountGrpc.Services
+﻿namespace DiscountGrpc.Services
 {
     public class DiscountService(DiscountContext dbContext, ILogger<DiscountService> logger)
         : DiscountProtoService.DiscountProtoServiceBase
     {
+
+
+
         public override async Task<CouponModel> GetDiscount(GetDiscountRequest request,
                                            ServerCallContext context)
         {
@@ -14,7 +14,7 @@ namespace DiscountGrpc.Services
 
             if (coupon is null)
             {
-                coupon = new Coupon { ProductName = "No Discount", Amount = 0, Description = "No Discount Desc" };
+                coupon = new Coupon { ProductName = "No product Available", Amount = 0, Description = "No Discount Desc" };
             }
 
             logger.LogInformation("Discount is retrieved for ProductName : {ProductName}, Amount : {Amount}", coupon.ProductName, coupon.Amount);
@@ -24,6 +24,10 @@ namespace DiscountGrpc.Services
 
 
         }
+
+
+
+
 
         public override async Task<CouponModel> CreateDiscount(CreateDiscountRequest request,
                                            ServerCallContext context)
