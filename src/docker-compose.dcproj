@@ -9,7 +9,7 @@
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>basketapi</DockerServiceName>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup> 
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
