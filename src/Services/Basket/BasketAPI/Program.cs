@@ -1,8 +1,9 @@
-using HealthChecks.UI.Client;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+// Application services
 var assembly = typeof(Program).Assembly;
 builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
@@ -12,6 +13,8 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 
+
+// Data services
 builder.Services.AddMarten( opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
@@ -25,6 +28,17 @@ builder.Services.AddStackExchangeRedisCache( options =>
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
 });
 
+
+// Grpc Services
+// Todo - add Grpc Services
+
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+});
+
+
+// Cross-Cutting Services
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddHealthChecks()
@@ -38,10 +52,10 @@ app.MapCarter();
 
 app.UseExceptionHandler(options => { });
 app.UseHealthChecks("/health",
-    new HealthCheckOptions
-    { 
-    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-    });
+new HealthCheckOptions
+{ 
+ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 
 app.Run();
