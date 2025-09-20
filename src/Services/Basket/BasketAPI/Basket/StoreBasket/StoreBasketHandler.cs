@@ -32,7 +32,7 @@ namespace BasketAPI.Basket.StoreBasket
             return new StoreBasketResult(command.Cart.UserName);
 
         }
-
+         
         private async Task DeductDicount(ShoppingCart cart, CancellationToken cancellationToken)
         {
 
