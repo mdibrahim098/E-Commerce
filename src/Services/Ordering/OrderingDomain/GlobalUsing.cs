@@ -2,3 +2,5 @@
 global using OrderingDomain.Enums;
 global using OrderingDomain.ValueObjects;
 global using MediatR;
+global using OrderingDomain.Exceptions;
+
