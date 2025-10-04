@@ -1,0 +1,23 @@
+﻿
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using OrderingDomain.Models;
+using OrderingDomain.ValueObjects;
+
+namespace OrderingInfrastrueture.Data.Configurations
+{
+    public class ProductConfiguration : IEntityTypeConfiguration<Product>
+    {
+        public void Configure(EntityTypeBuilder<Product> builder)
+        {
+            builder.HasKey(p => p.Id);
+            builder.Property(p => p.Id).HasConversion(
+                        ProductId => ProductId.Value,
+                        dbId => ProductId.Of(dbId));
+            builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
+
+        }
+    }
+
+}
