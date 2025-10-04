@@ -3,7 +3,7 @@
     public record Payment
     {
         public string? CardName { get; } = default!;
-        public string CarNumber { get; } = default!;
+        public string CardNumber { get; } = default!;
         public string Expiration { get; } = default!;
         public string CVV { get; } = default!;
         public int PaymentMethod { get; } = default!;
@@ -13,7 +13,7 @@
         private Payment(string cardName, string carNumber, string expiration, string cvv, int paymentMethod)
         {
             CardName = cardName;
-            CarNumber = carNumber;
+            CardNumber = carNumber;
             Expiration = expiration;
             CVV = cvv;
             PaymentMethod = paymentMethod;
