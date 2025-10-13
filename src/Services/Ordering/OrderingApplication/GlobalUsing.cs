@@ -3,4 +3,11 @@ global using OrderingApplication.Data;
 global using OrderingApplication.Dtos;
 global using OrderingDomain.Models;
 global using OrderingDomain.ValueObjects;
+global using FluentValidation;
+global using OrderingApplication.Exceptions;
+global using BuildingBlocks.Exceptions;
+
+
+
+
 
