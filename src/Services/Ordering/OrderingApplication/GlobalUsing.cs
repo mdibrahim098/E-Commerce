@@ -6,6 +6,10 @@ global using OrderingDomain.ValueObjects;
 global using FluentValidation;
 global using OrderingApplication.Exceptions;
 global using BuildingBlocks.Exceptions;
+global using MediatR;
+global using Microsoft.Extensions.Logging;
+global using OrderingDomain.Events;
+
 
 
 
