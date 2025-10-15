@@ -1,5 +1,5 @@
 ﻿namespace OrderingApplication.Orders.Commands.DeleteOrder
-{
+{ 
 
     public record DeleteOrderCommand(Guid OrderId)
         :ICommand<DeleteOrderResult>;
