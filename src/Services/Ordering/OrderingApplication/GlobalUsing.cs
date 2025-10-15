@@ -10,6 +10,8 @@ global using MediatR;
 global using Microsoft.Extensions.Logging;
 global using OrderingDomain.Events;
 global using Microsoft.EntityFrameworkCore;
+global using OrderingApplication.Extensions;
+
 
 
 
