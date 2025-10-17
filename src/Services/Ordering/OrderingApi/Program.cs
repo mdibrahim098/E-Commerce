@@ -1,8 +1,3 @@
-using OrderingApi;
-using OrderingApplication;
-using OrderingInfrastrueture;
-using OrderingInfrastrueture.Data.Extensions;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

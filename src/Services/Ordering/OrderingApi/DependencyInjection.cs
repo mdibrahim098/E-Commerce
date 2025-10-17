@@ -5,14 +5,14 @@
 
         public static IServiceCollection AddApiServices(this IServiceCollection services)
         {
-            // app.Carter();
+            services.AddCarter();
 
             return services;
         }
 
         public static WebApplication UseApiServices(this WebApplication app)
         {
-            // app.Carter();
+             app.MapCarter();
 
             return app;
         }
