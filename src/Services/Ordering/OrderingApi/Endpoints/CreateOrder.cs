@@ -1,6 +1,4 @@
-﻿using Mapster;
-using MediatR;
-using OrderingApplication.Dtos;
+﻿using OrderingApplication.Orders.Commands.CreateOrder;
 
 namespace OrderingApi.Endpoints
 {
@@ -20,7 +18,7 @@ namespace OrderingApi.Endpoints
         {
             app.MapPost("/orders", async (CreateOrderRequest request, ISender sender) =>
             {
-                var command = request.Adapt<CreateOrderRequest>();
+                var command = request.Adapt<CreateOrderCommand>();
 
                 var result = await sender.Send(command);
 
