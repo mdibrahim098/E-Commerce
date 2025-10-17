@@ -1,5 +1,5 @@
 ﻿namespace OrderingApi.Endpoints
-{
+{ 
 
     // Accept pagination parameters.
     // Constructs a GetOrderQuery with these parameters
