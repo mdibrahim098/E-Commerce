@@ -1,5 +1,4 @@
-﻿
-using OrderingApplication.Orders.Commands.UpdateOrder;
+﻿using OrderingApplication.Orders.Commands.UpdateOrder;
 
 namespace OrderingApi.Endpoints
 {
@@ -17,7 +16,7 @@ namespace OrderingApi.Endpoints
         public void AddRoutes(IEndpointRouteBuilder app)
         {
 
-            app.MapPost("/orders", async (UpdateOrderRequest request, ISender sender) =>
+            app.MapPut("/orders", async (UpdateOrderRequest request, ISender sender) =>
             {
                 var command = request.Adapt<UpdateOrderCommand>();
 
