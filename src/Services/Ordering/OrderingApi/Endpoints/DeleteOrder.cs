@@ -8,7 +8,7 @@ namespace OrderingApi.Endpoints
     // Sends the command to the mediator
     // return a success or not found result
 
-
+    // Public record DeleteOrderRuquest(Guid Id);
     public record DeleteOrderResponse(bool IsSuccess);
 
     public class DeleteOrder : ICarterModule

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace OrderingInfrastrueture.Data.Interceptors
 {
-    public class DispatchDomainEventInterceptor(IMediator mediator) 
+    public class DispatchDomainEventInterceptor(IMediator mediator)
                : SaveChangesInterceptor
     {
 
@@ -21,7 +21,7 @@ namespace OrderingInfrastrueture.Data.Interceptors
 
         public async Task DispatchDomainEvents(DbContext? context)
         {
-            if(context == null) return;
+            if (context == null) return;
             var aggregates = context.ChangeTracker
                 .Entries<IAggregate>()
                 .Where(e => e.Entity.DomainEvents.Any())
@@ -33,7 +33,7 @@ namespace OrderingInfrastrueture.Data.Interceptors
 
             aggregates.ToList().ForEach(e => e.ClearDomainEvents());
 
-           foreach (var domainEvent in domainEvenets)
+            foreach (var domainEvent in domainEvenets)
             {
                 await mediator.Publish(domainEvent);
             }
