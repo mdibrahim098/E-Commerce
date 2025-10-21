@@ -17,7 +17,7 @@ namespace OrderingApi.Endpoints
         {
             app.MapDelete("/orders/{id}", async (Guid Id, IMediator mediator) =>
             {
-               
+                
                 var result = await mediator.Send(new DeleteOrderCommand(Id));
                
                 var response = result.Adapt<DeleteOrderResponse>();
