@@ -1,4 +1,6 @@
-﻿namespace OrderingApi
+﻿using BuildingBlocks.Exceptions.Handler;
+
+namespace OrderingApi
 {
     public static class DependencyInjection
     {
@@ -7,12 +9,16 @@
         {
             services.AddCarter();
 
+            services.AddExceptionHandler<CustomExceptionHandler>();
+           
             return services;
         }
 
         public static WebApplication UseApiServices(this WebApplication app)
         {
-             app.MapCarter();
+            app.MapCarter();
+
+            app.UseExceptionHandler(options => { });
 
             return app;
         }
