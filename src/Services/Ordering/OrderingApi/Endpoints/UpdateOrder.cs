@@ -8,7 +8,7 @@ namespace OrderingApi.Endpoints
     // Sends the command for processing
     // return a success or error response basec on the outcome
 
-    public record UpdateOrderRequest(OrderDto order);
+    public record UpdateOrderRequest(OrderDto Order);
     public record UpdateOrderResponse(bool IsSuccess);
 
     public class UpdateOrder : ICarterModule
