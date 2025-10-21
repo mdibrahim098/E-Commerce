@@ -24,7 +24,7 @@ namespace OrderingApi.Endpoints
 
               var response = result.Adapt<GetOrdersResponse>();
 
-              return Results.Ok(result);
+              return Results.Ok(response);
           })
               .WithName("GetOrders")
               .Produces<GetOrdersResponse>(StatusCodes.Status200OK)

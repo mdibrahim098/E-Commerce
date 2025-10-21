@@ -3,6 +3,6 @@
 
     public record GetOrdersByCustomerQuery(Guid CustomerId)
         :IQuery<GetOrderByCustomerResult>;
-    public record GetOrderByCustomerResult(IEnumerable<OrderDto> orders);
+    public record GetOrderByCustomerResult(IEnumerable<OrderDto> Orders);
 
 }
