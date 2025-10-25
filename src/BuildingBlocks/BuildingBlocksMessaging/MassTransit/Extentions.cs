@@ -8,36 +8,31 @@ namespace BuildingBlocksMessaging.MassTransit
     public static class Extentions
     {
         public static IServiceCollection AddMessageBroker
-            (this IServiceCollection sevices,IConfiguration configuration,
+            (this IServiceCollection services, IConfiguration configuration,
             Assembly? assembly = null)
         {
 
             // Implement rabbitMQ MassTransit configuration
 
-            sevices.AddMassTransit(config =>
+            services.AddMassTransit(config =>
             {
-               config.SetKebabCaseEndpointNameFormatter();
+                config.SetKebabCaseEndpointNameFormatter();
 
-                if(assembly != null)
-                {
+                if (assembly != null)
                     config.AddConsumers(assembly);
-                }
 
                 config.UsingRabbitMq((context, configurator) =>
                 {
-                    configurator.Host(new Uri(configuration["MassageBroker:Host"]!), host =>
+                    configurator.Host(new Uri(configuration["MessageBroker:Host"]!), host =>
                     {
-                        host.Username(configuration["MassageBroker:UserName"]);
-                        host.Password(configuration["MassageBroker:Password"]);
+                        host.Username(configuration["MessageBroker:UserName"]);
+                        host.Password(configuration["MessageBroker:Password"]);
                     });
                     configurator.ConfigureEndpoints(context);
                 });
-
-
             });
 
-
-            return sevices;
+            return services;
         }
 
 
