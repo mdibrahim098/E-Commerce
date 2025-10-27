@@ -25,7 +25,7 @@ namespace BasketAPI.Basket.StoreBasket
         public async Task<StoreBasketResult> Handle(StoreBasketCommand command, CancellationToken cancellationToken)
         {
 
-            await DeductDicount(command.Cart, cancellationToken);
+            await DeductDiscount(command.Cart, cancellationToken);
 
             await repository.StoreBasket(command.Cart, cancellationToken);
 
@@ -33,15 +33,14 @@ namespace BasketAPI.Basket.StoreBasket
 
         }
          
-        private async Task DeductDicount(ShoppingCart cart, CancellationToken cancellationToken)
+        private async Task DeductDiscount(ShoppingCart cart, CancellationToken cancellationToken)
         {
 
             // communicate with discount grpc and calculate latest price of product
-            foreach(var item in cart.Items)
+            foreach (var item in cart.Items)
             {
                 var coupon = await discountProto.GetDiscountAsync(new GetDiscountRequest { ProductName = item.ProductName }, cancellationToken: cancellationToken);
                 item.Price -= coupon.Amount;
-
             }
 
 

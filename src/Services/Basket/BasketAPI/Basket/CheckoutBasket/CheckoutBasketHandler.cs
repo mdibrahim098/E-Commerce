@@ -29,22 +29,19 @@ namespace BasketAPI.Basket.CheckoutBasket
             // delete the basket
 
             var basket = await repository.GetBasket(command.BasketCheckoutDto.UserName, cancellationToken);
-
-            if(basket == null)
+            if (basket == null)
             {
                 return new CheckoutBasketResult(false);
             }
 
-            // Fix: Use object initializer to set init-only property TotalPrice
             var eventMessage = command.BasketCheckoutDto.Adapt<BasketCheckoutEvent>();
             eventMessage.TotalPrice = basket.TotalPrice;
 
             await publishEndpoint.Publish(eventMessage, cancellationToken);
 
-           await repository.DeleteBasket(command.BasketCheckoutDto.UserName, cancellationToken);
-           
-            
-           return new CheckoutBasketResult(true);
+            await repository.DeleteBasket(command.BasketCheckoutDto.UserName, cancellationToken);
+
+            return new CheckoutBasketResult(true);
 
         }
     }

@@ -9,7 +9,7 @@
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            
+
             app.MapPost("/basket/checkout", async (CheckoutBasketRequest request, ISender sender) =>
             {
                 var command = request.Adapt<CheckoutBasketCommand>();
@@ -20,11 +20,13 @@
 
                 return Results.Ok(response);
             })
-            .WithName("CheckoutBasket")
-            .Produces<CheckoutBasketResponse>(StatusCodes.Status201Created)
-            .ProducesProblem(StatusCodes.Status400BadRequest)
-            .WithSummary("CheckoutBasket")
-            .WithDescription("CheckoutBasket");
+          .WithName("CheckoutBasket")
+          .Produces<CheckoutBasketResponse>(StatusCodes.Status201Created)
+          .ProducesProblem(StatusCodes.Status400BadRequest)
+          .WithSummary("Checkout Basket")
+          .WithDescription("Checkout Basket");
+
+
         }
     }
 
